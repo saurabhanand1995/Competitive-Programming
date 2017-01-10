@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    long long m=1000007;
+  long long t,n,ans;
+  scanf("%lld",&t);
+
+  while (t--)
+  {
+      scanf("%lld",&n);
+      ans=(3*n*n+n)/2;
+      ans=ans%m;
+      printf("%lld\n",ans);
+  }
+    return 0;
+}

@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <string.h>
+int main(void) {
+	// your code goes here
+	long long int mod=1000000007,res,temp;
+	int i,n,idx;
+	int sum[26];
+	int t;
+	scanf("%d",&t);
+	char str[100002];
+	while (t--)
+	{
+		scanf("%s",str);
+		res=2;
+		n=strlen(str);
+		memset(sum,0,sizeof(sum));
+		sum[str[0]-'A']=1;
+		
+		for (i=1;i<n;i++)
+		{
+			idx=str[i]-'A';
+			temp=(res-sum[idx]+mod)%mod;
+			res=(res+temp)%mod;
+			sum[idx]=(sum[idx]+temp)%mod;
+			
+		}
+		printf("%lld\n",res);
+	}
+	return 0;
+}

@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+{
+   int t=0;
+   int k,i;
+   int c,c1;
+   double sum,d;
+   double mean;
+   int mean1;
+   int arr[10001];
+   do
+   {
+       k=0;
+       c=0;
+       sum=0.0;
+       scanf("%d",&t);
+       if (t == -1)
+        break;
+       while (t--)
+       {
+           scanf("%d",&arr[k]);
+           sum=sum+arr[k];
+           k++;
+       }
+       mean=sum/k;
+       d=(int)(mean*10)-((int)mean*10);
+
+       if (d != 0)
+       printf("-1\n");
+
+       else
+       {
+           c=0;
+       mean1=(int)mean;
+
+
+
+        for (i=0;i<k;i++)
+        {
+         c1=arr[i]-mean1;
+if (c1>0)
+        c=c+abs(arr[i]-mean1);
+
+        }
+
+        printf("%d\n",c);
+
+       }
+
+
+   } while (1);
+   return 0;
+}

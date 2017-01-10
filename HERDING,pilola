@@ -1,0 +1,98 @@
+#include <iostream>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int n,m;
+    scanf("%d %d",&n,&m);
+    static char arr[1001][1001];
+    static int family[1001][1001];
+    memset(family,-1,sizeof(family));
+    long int c=0;
+    for(int i=0;i<n;i++)
+    {
+        scanf("%s",arr[i]);
+    }
+    int posi,posj,q1,q2;
+    for (int i=0;i<n;i++)
+    {
+        for (int j=0;j<m;j++)
+        {
+            posi=i;posj=j;
+            if (arr[posi][posj] != 'v')
+            {
+
+                vector<pair<int,int> > bt;
+                pair<int,int> p;
+
+                while (1)
+                {
+                bt.push_back(make_pair(posi,posj));
+
+                if (arr[posi][posj] == 'v')
+                {
+                    if (family[posi][posj] == -1)
+                    {
+                        for (int k=0;k<bt.size();k++)
+                        {
+                        q1=bt[k].first;
+                        q2=bt[k].second;
+                        //arr[q1][q2]='v';
+                        family[q1][q2]=c;
+                        }
+                        c++;
+
+                    }
+                    else
+                    {
+                        for (int k=0;k<bt.size();k++)
+                        {
+                        q1=bt[k].first;
+                        q2=bt[k].second;
+                        arr[q1][q2]='v';
+
+                        family[q1][q2]=family[posi][posj];
+                        }
+
+                    }
+                    bt.clear();
+                    break;
+
+
+
+                }//closing if when a visited node is reached
+
+                if (arr[posi][posj] == 'N')
+                {
+                        arr[posi][posj]='v';
+                        posi--;
+                }
+                else if (arr[posi][posj] == 'S')
+                {
+                    arr[posi][posj]='v';
+                    posi++;
+                }
+                else if (arr[posi][posj] == 'W')
+                {
+                    arr[posi][posj]='v';
+                    posj--;
+                }
+                else if (arr[posi][posj] == 'E')
+                {
+                    arr[posi][posj]='v';
+                        posj++;
+                }
+
+
+                }//closing while
+            }
+        }
+    }
+    
+    printf("%ld\n",c);
+
+
+    return 0;
+}

@@ -1,0 +1,116 @@
+#include <iostream>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+long long int pow1(int a, int b)
+{
+    long long int ans1=1;
+    for (int i=0;i<b;i++)
+        ans1*=a;
+    return ans1;
+}
+
+int main()
+{
+    int t;
+    cin >> t;
+    for(int t1=1;t1<=t;t1++){
+        char str[65];
+        scanf("%s",str);
+        //printf("chk\n");
+        int arr[38]={0};
+        int len=strlen(str);
+        for (int i=0;i<len;i++)
+        {
+            //printf("%d\n",int(str[i]));
+            if (int(str[i]) > 57)
+            {
+                arr[str[i]-87]++;
+            }
+            else
+            {
+
+
+                arr[str[i]-48]++;
+                //printf("for index as %d",(i-48));
+            }
+        }
+        /*for (int i=0;i<38;i++)
+        {
+            printf("for i as %d the count is %d\n",i,arr[i]);
+        }*/
+        int base=0;
+
+        for (int i=0;i<38;i++)
+        {
+            if (arr[i] > 0)
+            {
+                base++;
+            }
+        }
+        if (base< 2)
+            base=2;
+
+        //printf("%d\n",base);
+        int temp;
+        int digits[base];
+        digits[0]=1;
+        digits[1]=0;
+        for (int p=2;p<base;p++)
+            digits[p]=p;
+        int counterDigits=0,tempCounter=0;
+        int re[len];
+        memset(re,-1,sizeof(re));
+
+        for (int i=0;i<len;i++)
+        {
+            if (int(str[i]) > 58)
+            {
+                tempCounter=str[i]-87;
+
+            }
+            else
+            {
+            tempCounter=str[i]-48;
+
+            }
+            temp=arr[tempCounter];
+
+            if (arr[tempCounter] != -2)
+            {
+                re[i]=digits[counterDigits];
+                counterDigits++;
+
+            }
+            if (temp > 1)
+            {
+                for (int k=i+1;k<len;k++)
+                {
+                    if (str[k] == str[i])
+                    {
+                        re[k]=re[i];
+                    }
+                }
+            }
+            arr[tempCounter] = -2;
+        }
+
+        /*for (int i=0;i<len;i++)
+        {
+            printf("%d ",re[i]);
+        }
+        printf("he\n");*/
+        long long int ans=0;
+        for (int i=0;i<len;i++)
+        {
+            ans+=re[i]*pow1(base,len-i-1);
+
+        }
+        printf("Case #%d: %lld\n",t1,ans);
+
+
+
+    }
+    return 0;
+}

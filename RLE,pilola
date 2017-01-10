@@ -1,0 +1,103 @@
+#include<stdio.h>
+#include<string.h>
+#define gc getchar_unlocked
+#define pc putchar_unlocked
+void writeInt(int res)
+{
+     int rev,count=0,n;
+     rev=res;
+     if(res==0)
+     {
+               pc('0');
+               //pc('\n');
+               return;
+     }
+     while(rev%10==0)
+     {
+                     rev=rev/10;
+                     count++;
+     }
+     rev=0;
+     n=res;
+     while(n)
+     {
+             rev=(rev*10)+(n%10);
+             n=n/10;
+     }
+     while(rev)
+     {
+               pc((rev%10)+48);
+               rev=rev/10;
+     }
+     while(count--)
+                   pc('0');
+     //pc('\n');
+}
+int main()
+{
+    char str[100002],character;
+    int i,fre,n;
+    while(scanf("%s",str)!=EOF)
+    {
+        //if(strcmp(str,"EOF")==0)
+          //  break;
+        n=strlen(str);
+        fre=1;
+        character=str[0];
+        for(i=1;i<n;i++)
+        {
+            if(str[i]==character)
+            {
+                fre++;
+                continue;
+            }
+            else
+            {
+                if(fre>3)
+                {
+                    writeInt(fre),pc('!'),pc(character);
+                }
+                else if(fre==3)
+                {
+                    //printf("%c%c%c",character,character,character);
+                    pc(character),pc(character),pc(character);
+                }
+                else if(fre==2)
+                {
+                    //printf("%c%c",character,character);
+                    pc(character),pc(character);
+                }
+                else if(fre==1)
+                {
+                    //printf("%c",character);
+                    pc(character);
+                }
+                fre=1;
+                character=str[i];
+            }
+        }
+        if(fre>3)
+        {
+            //printf("%d!%c",fre,character);
+            writeInt(fre),pc('!'),pc(character);
+        }
+        else if(fre==3)
+        {
+            //printf("%c%c%c",character,character,character);
+            pc(character),pc(character),pc(character);
+        }
+        else if(fre==2)
+        {
+            //printf("%c%c",character,character);
+            pc(character),pc(character);
+        }
+        else if(fre==1)
+        {
+            //printf("%c",character);
+            pc(character);
+        }
+        //printf("\n");
+        pc('\n');
+    }
+    return 0;
+}

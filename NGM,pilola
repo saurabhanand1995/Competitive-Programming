@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    long long n;int d;
+    scanf("%lld",&n);
+    d=n%10;
+    if (d==0)
+        printf("2\n");
+    else
+    {
+        printf("1\n%d",d);
+    }
+    return 0;
+}

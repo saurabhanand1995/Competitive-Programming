@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+   int n,k;
+   long long int ans;
+
+   while (1)
+   {
+       scanf("%d",&n);
+       if (n==0)
+        break;
+       if (n==1)
+       {
+        printf("1\n");
+
+       }
+
+       else
+       {
+           k=n;
+           ans=0;
+
+           while (k>=1)
+           {
+              ans=ans+(((n-k)+1)*((n-k)+1));
+              k--;
+           }
+           printf("%lld\n",ans);
+
+       }
+   }
+   return 0;
+}

@@ -1,0 +1,114 @@
+#include<stdio.h>
+#include<string.h>
+ 
+short int length1,length2;
+char total[102];
+char more[102];
+char result[102];
+ 
+void subtract(void);
+void divide(void);
+void add(void);
+ 
+int main()
+{
+	int i,j;
+	for(i=0;i<10;i++)
+	{
+		gets(total);
+		gets(more);
+		length1=strlen(total);
+		length2=strlen(more);
+		subtract();
+		divide();
+		add();
+		j=0;
+		while(result[j]=='0')
+			j++;
+		if((j==1) && (length1==1))
+			putchar('0');
+		for(;j<length1;j++)
+			putchar(result[j]);
+		putchar('\n');
+		j=0;
+		while(total[j]=='0')
+			j++;
+		if((j==1) && (length1==1))
+			putchar('0');
+		for(;j<length1;j++)
+			putchar(total[j]);
+		putchar('\n');
+	}
+	return 0;
+}
+ 
+void subtract(void)
+{
+	int borrow,diff,index1,index2;
+	index1=length1-1;
+	index2=length2-1;
+	borrow=0;
+	while(index2>=0)
+	{
+		diff=total[index1]-more[index2]-borrow;
+		if(diff<0)
+		{
+			diff+=10;
+			borrow=1;
+		}
+		else
+			borrow=0;
+		total[index1]=(diff%10)+48;
+		index1--;
+		index2--;
+	}
+	while((index1>=0) && (borrow==1))
+	{
+		diff=total[index1]-borrow-48;
+		if(diff<0)
+		{
+			diff+=10;
+			borrow=1;
+		}
+		else
+			borrow=0;
+		total[index1]=(diff%10)+48;
+		index1--;
+	}
+}
+ 
+void divide(void)
+{
+	int index,rem,temp;
+	index=rem=0;
+	while(index<length1)
+	{
+		temp=(rem*10)+total[index]-48;
+		rem=temp%2;
+		total[index]=(temp/2)+48;
+		index++;
+	}
+}
+ 
+void add(void)
+{
+	int carry,index1,index2,sum;
+	index1=length1-1;
+	index2=length2-1;
+	carry=0;
+	while(index2>=0)
+	{
+		sum=total[index1]+more[index2]+carry-96;
+		result[index1]=(sum%10)+48;
+		carry=sum/10;
+		index1--;
+		index2--;
+	}
+	while(index1>=0)
+	{
+		sum=total[index1]+carry-48;
+		result[index1]=(sum%10)+48;
+		carry=sum/10;
+		index1--;
+	}
+} 

@@ -1,0 +1,118 @@
+#include <iostream>
+#include <string>
+#include <string.h>
+#include <cstring>
+#include <stdlib.h>
+#include <stdio.h>
+using namespace std;
+
+string arr[10]={"063","010","093","079","106","103","119","011","127","107"};
+
+string to_string(int n){
+    if ( n == 0)
+        return "0";
+    else if ( n==1)
+        return "1";
+    else if ( n==2)
+        return "2";
+    else if ( n==3)
+        return "3";
+    else if ( n==4)
+        return "4";
+    else if ( n==5)
+        return "5";
+    else if ( n==6)
+        return "6";
+    else if ( n==7)
+        return "7";
+    else if ( n==8)
+        return "8";
+    else if ( n==9)
+        return "9";
+
+
+}
+
+string ind(string input1)
+{
+    for (int i=0;i<10;i++)
+    {
+        if (arr[i] == input1)
+        {
+            string ss1=to_string(i);
+            return (ss1);
+
+        }
+
+    }
+    return "";
+}
+
+long int convert(string str)
+{
+    string number="";
+    while (str.size() > 0)
+    {
+       // number=number+ind(str[0:3]);
+        number = number+ind(str.substr(0,3));
+
+        if (str.size() > 3)
+        {
+
+
+            str = str.substr(3,str.size()-3);
+
+        }
+        else
+            str="";
+    }
+    //cout << number << endl;
+    //cout << number << endl;
+    return atol(number.c_str());
+
+}
+
+int main()
+{
+    string inp,fir,sec,fans;
+    long int n1,n2,l,t;
+    int i;
+
+    //n1=convert("010010");
+    //printf("%ld\n",n1);
+
+
+    cin >> inp;
+
+
+
+    while (inp != "BYE")
+    {
+        fans="";
+        i=inp.find("+");
+        l=inp.size();
+
+        fir = inp.substr(0,i);
+
+        sec = inp.substr(i+1,l-fir.size()-2);
+
+        n1=convert(fir);
+        n2=convert(sec);
+
+        long int ans = n1+n2;
+        while (ans > 0)
+        {
+            t=ans%10;
+            fans=arr[(int)t]+fans;
+            ans/=10;
+
+
+        }
+
+        cout << (inp+fans) << endl;
+        cin >> inp;
+
+    }
+
+   return 0;
+}

@@ -1,0 +1,81 @@
+#include <bits/stdc++.h>
+
+typedef long long       ll;
+
+#define MOD         1000000007
+#define scll(t)     scanf("%lld",&t)
+#define sc(t)       scanf("%d",&t)
+#define max(a,b)    (a>=b?a:b)
+#define min(a,b)    (a<b?a:b)
+#define gc          getchar_unlocked
+#define mp          make_pair
+#define pb          push_back
+
+using namespace std;
+
+
+// this function returns the first number containing 1's and 0's, which is a multiple of n
+string bfs(ll n)
+{
+        if(n==1)
+            return "1";
+
+        string ans;
+        pair<string,ll> current;
+        ll nextVal;
+        queue<pair<string,ll> > q;
+        q.push(mp("1",1));
+        while(!q.empty())
+        {
+            current = q.front();
+            q.pop();
+            string s = current.first;
+            ll rem = current.second;
+            if(rem == 0) //if match found return
+            {
+                ans=s;
+                break;
+            }
+
+            nextVal = (rem*10)%n; 
+            if(nextVal == 0) //if match found return
+            {
+                ans = s+'0';
+                break;
+            }
+            else
+            {
+                q.push(mp(s+'0',nextVal));
+            }
+
+            nextVal = (rem*10 + 1)%n;
+            if(nextVal == 0) //if match found return
+            {
+                ans = s+'1';
+                break;
+            }
+            else
+            {
+                q.push(mp(s+'1',nextVal));
+            }
+
+        }
+    return ans;
+}
+
+
+int main()
+{
+
+    int t,i;
+    ll n;
+    string ans;
+    sc(t);
+    while(t--)
+    {
+        scll(n);
+        ans = bfs(n);
+        cout<<ans<<endl;
+    }
+
+} 

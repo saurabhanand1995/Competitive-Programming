@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+int min(int a,int b, int c)
+{
+	if (a<=b && a<=c)
+	return a;
+	else if (b<=a && b<=c)
+	return b;
+	else
+	return c;
+
+}
+int main(void) {
+	// your code goes here
+	int t,i,j;
+	scanf("%d",&t);
+    static int arr[2001][2001];
+	char arr1[2001];
+	char arr2[2001];
+
+	while (t--)
+	{
+		scanf("%s",arr1);
+		scanf("%s",arr2);
+		//memset(arr,0,2001*2001);
+		int l1=strlen(arr1);
+		int l2=strlen(arr2);
+		//printf("len 1 %d\n",l1);
+		//printf("len 2 %d\n",l2);
+		for (i=0;i<=l1;i++)
+		arr[i][0]=i;
+
+		for (i=0;i<=l2;i++)
+		arr[0][i]=i;
+
+		for (i=1;i<=l1;i++)
+		{
+			for (j=1;j<=l2;j++)
+			{
+				if ( arr1[i-1] == arr2[j-1] )
+				{
+					//printf(" i == %d and j == %d\n",i,j);
+					arr[i][j]=arr[i-1][j-1];
+				}
+				else
+				{
+					arr[i][j]=min((arr[i-1][j]+1),(arr[i][j-1]+1),(arr[i-1][j-1]+1));
+				}
+			}
+		}
+
+		
+		printf("%d\n",arr[l1][l2]);
+
+
+
+
+
+
+	}
+	return 0;
+}

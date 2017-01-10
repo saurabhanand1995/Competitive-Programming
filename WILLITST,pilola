@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+   long long int n;
+   scanf("%lld",&n);
+   int f=0;
+   if (n==0)
+   {
+    printf("TAK\n");
+   }
+
+   while (n>0)
+   {
+       if (n%2 == 0)
+        n/=2;
+
+       else
+        {
+            if (n==1)
+            {
+
+
+                printf("TAK\n");
+                break;
+            }
+            else{
+                printf("NIE\n");
+                break;
+            }
+
+
+       }
+   }
+
+
+
+
+      return 0;
+      }
+

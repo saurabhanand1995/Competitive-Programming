@@ -1,0 +1,43 @@
+#include<stdio.h>
+
+
+long long int a[100][2];
+int i;
+
+long long int r(long long int n)
+{
+	long long int k;
+	int j;
+	if (n<12)
+    {
+
+
+		return n;
+    }
+	for(j=0;j<i;j++){
+		if (a[j][0]==n)
+	return a[j][1];}
+	k=r(n/2)+r(n/3)+r(n/4);
+	if(k<n){
+		k=n;}
+	a[i][0]=n;
+	a[i][1]=k;
+	i++;
+	return k;
+}
+
+
+int main()
+{
+long long int m,a;
+int t=10;
+	while(t--)
+	{
+		scanf("%lld",&m);
+		i=0;
+		a=r(m);
+		printf( "%lld\n",a);
+
+	}
+return 0;
+}

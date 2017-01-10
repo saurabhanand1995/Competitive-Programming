@@ -1,0 +1,53 @@
+#include <iostream>
+#include <bits/stdc++.h>
+#define MAX 10000009
+
+using namespace std;
+
+static long long int a[MAX];
+static long long int f[MAX];
+
+void sieve()
+{
+    for (long long int i=2;i<=MAX;i++)
+    {
+        if (f[i] == -1)
+        {
+            for (long long int j=i+i;j<=MAX;j+=i)
+            {
+                if (f[j] == -1)
+                    f[j]=i;
+            }
+        }
+    }
+
+
+}
+
+int main()
+{
+
+    for (long long int i=0;i<MAX;i++)
+    {
+        f[i]=-1;
+    }
+    sieve();
+    a[0]=0;a[1]=0;
+
+
+    for (int p=2;p<=MAX;p++)
+    {
+        a[p]=a[p-1]+((f[p]!=-1)?f[p]:p);
+    }
+
+    int test;
+    long long int inp=0;
+    scanf("%d",&test);
+    while (test--)
+    {
+        scanf("%lld",&inp);
+        printf("%lld\n",a[inp]);
+    }
+    return 0;
+}
+

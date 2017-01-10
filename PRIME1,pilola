@@ -1,0 +1,98 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void sieve(int limit, vector<long int> &v)
+{
+    bool mark[limit+1];
+    long int i,j;
+    memset(mark,true,sizeof(mark));
+    for (i=2;i*i<=limit;i++)
+    {
+        if (mark[i] == true)
+        {
+            for (j=i+i;j<=limit;j+=i)
+            {
+                mark[j]=false;
+            }
+        }
+    }
+    for (i=2;i<=limit;i++)
+    {
+        if (mark[i] == true)
+        {
+            v.push_back(i);
+        }
+    }
+
+}
+int main()
+{
+
+    long int a,b,high,low,limit,rand,i,num;
+    int t;
+    scanf("%d",&t);
+    while (t--)
+    {
+        scanf("%ld %ld",&a,&b);
+        long int temp=floor(sqrt(b));
+        limit=temp;
+        //printf ("hello1\n");
+        //printf ("%ld\n",b);
+        vector<long int> v;
+        sieve(temp,v);
+        //printf ("hello2\n");
+        for (i=0;i< (v.size());i++)
+        {
+            if (v[i]>=a)
+            printf("%ld\n",v[i]);
+        }
+        //printf("heya\n");
+        //printf("%ld",temp);
+        low=temp+1;
+
+        while (low <= b)
+        {
+            //printf("loop\n");
+            high = low+limit;
+            //printf("low is %ld\n",low);
+            //printf("high is %ld\n",high);
+
+
+            if ((high-1)>=a)
+                {
+
+            bool mark1[limit+1];
+
+
+            memset(mark1,true,sizeof(mark1));
+
+            for (i=0;i<v.size();i++)
+            {
+                rand=floor(low/v[i])*v[i];
+                if (rand < low)
+                {
+                    rand = rand + v[i];
+                }
+                for (;rand < high; rand+=v[i] )
+                {
+                    mark1[rand-low+1] = false;
+                }
+
+            }
+
+            for (i=1;i<=limit;i++)
+            {
+                num=i+low-1;
+                if ((mark1[i] == true) && (num>=a) && (num<=b))
+                    printf("%ld\n",num);
+            }
+            }
+            low=high;
+            high = low+limit;
+
+        }
+        printf("\n");
+
+    }
+
+}

@@ -1,0 +1,109 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+long long min(long long a,long long b)
+{
+    if (a<=b)
+        return a;
+
+    return b;
+}
+int main()
+{
+   int n;int count=1;
+   long long ea,sal,sev,sum,sum1,sum2,sum3;int c=0,p,j,k,i,d,d1;
+
+   int nol[25];
+   int mark[25];
+   //chk condition for i=n
+   scanf("%d",&n);
+   while (n!=0)
+   {
+       ea=sal=sev=sum=0;
+
+      scanf("%lld",&ea);
+       scanf("%lld",&sal);
+
+    scanf("%lld",&sev);
+
+    for (i=1;i<=n;i++)
+    {
+        scanf("%d",&nol[i]);
+        mark[i]=nol[i];
+    }
+
+    sum=nol[1]*(ea+sal);
+    /*d1=nol[2]-nol[2-1];
+        d=mark[2]-mark[2-1];*/
+
+    for (i=2;i<=n;i++)
+    {
+        /*for (p=1;p<=n;p++)
+            mark[]*/
+
+        //d1=nol[i]-nol[i-1];
+        d=mark[i]-mark[i-1];
+
+        if (d>0)
+        {
+            sum+=d*ea+nol[i]*sal;
+        }
+
+        else if (d==0)
+        {
+            sum+=nol[i]*(sal);
+        }
+        else
+        {
+            c=0;d=-d;
+           for (j=i+1;j<=n;j++)
+           {
+              if (mark[j]>mark[i])
+                c++;
+           }
+
+           if (c==0)
+           {
+              sum+=nol[i]*sal+d*sev;
+           }
+           else
+           {
+
+                sum+=nol[i]*sal;
+              for (j=1;j<=d;j++)
+              {
+                  for (k=i+1;k<=n;k++)
+                  {
+                      if ((mark[k])>mark[i])
+                      {
+                          sum1=sum+(k-i)*sal;
+                          sum2=sum+sev+ea;
+
+                          sum3=min(sum1,sum2);
+                          if (sum3==sum1){
+                            mark[k]--;
+                            sum=sum3;
+
+
+                            }
+                            else{
+                                sum=sum+sev;
+
+                            }
+                          break;
+                      }
+                  }
+                 }
+                }
+                }//closing else
+
+                mark[i]=nol[i];
+                }
+
+       printf("Case %d, cost = $%lld\n",count,sum);
+
+       scanf("%d",&n);
+       count++;
+   }//closing while
+    return 0;
+}

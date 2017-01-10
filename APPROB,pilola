@@ -1,0 +1,44 @@
+#include<stdio.h>
+long long gcd(long long m,long long n){
+ if(n==0)
+  return m;
+ else 
+  return gcd(n,m%n);
+}
+long long calcu(long long a,long long n){
+  long long u,c,d;
+  u=0;
+  if(n%2==0){
+   c=(a-n)/2;
+   c--;
+   d=(a-1)/2;
+   u=(d*(d+1))/2;
+   u=u-(c*(c+1))/2;
+   u*=2;
+  }else{
+   c=(a-n)/2;
+   c--;
+   d=(a-2)/2;
+   u=(d*(d+1))/2;
+   u=u-(c*(c+1))/2;
+   u*=2;
+   u+=((a-1)/2);
+  }
+  u+=n;
+  return u;
+}
+int main(){
+ long long a,b,n,p,t;
+ scanf("%lld",&t);
+ while(t--){
+  scanf("%lld",&n);
+  a=calcu(3*n,n)+calcu(n,n-2);
+  a-=(n-2);
+  p=n*2*n*3*n;
+  b=gcd(a,p);
+  a/=b;
+  p/=b;
+  printf("%lld/%lld\n",a,p);
+ }
+ return 0;
+}

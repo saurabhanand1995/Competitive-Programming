@@ -1,0 +1,17 @@
+import java.io.*;
+class spojHangover
+{
+    public static void main(String args[]) throws IOException
+    {
+        BufferedReader x=new BufferedReader(new InputStreamReader(System.in));
+        long n;
+       while (true)
+       {
+          n=Long.parseLong(x.readLine());
+          if (n==42)
+          break;
+          System.out.println(n);
+        }
+        
+    }
+}

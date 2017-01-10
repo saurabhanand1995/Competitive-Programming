@@ -1,0 +1,91 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> v;
+
+
+void sieve(int limit)
+{
+    bool mark[limit+1];
+    memset(mark,true,sizeof(mark));
+
+    for (int i=3;i<=limit;i+=2)
+    {
+        if (mark[i] == true)
+        {
+            for (int j=i+i;j<=limit;j+=i)
+            {
+                mark[j]=false;
+            }
+        }
+    }
+    v.push_back(2);
+    for (int i=3;i<=limit;i+=2)
+    {
+        if (mark[i] == true)
+            v.push_back(i);
+    }
+
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    int count[10010];
+    memset(count,0,sizeof(count));
+
+    sieve(10010);
+
+    int arr[n+1];
+    for (int i=0;i<=n;i++)
+        arr[i]=i;
+    int cur;
+
+    //printf("hello\n");
+    /*for (int i=0;i<v.size();i++)
+    {
+        printf("%d ",v[i]);
+    }
+    printf("\n");*/
+
+    for (int i=0;i<v.size();i++)
+    {
+        cur=v[i];
+        for (int j=2;j<=n;j++)
+        {
+
+            if (arr[j] == 0)
+                continue;
+            while ((arr[j]%cur) == 0)
+            {
+                arr[j]/=cur;
+                count[cur]++;
+                if (arr[j] == 0)
+                    break;
+
+            }
+        }
+    }
+    int flag=0;
+    for (int i=2;i<=n;i++)
+    {
+        if (count[i]!= 0)
+        {
+            if (flag == 0)
+            {
+                flag=1;
+                printf("%d^%d",i,count[i]);
+            }
+            else{
+                    printf(" * ");
+
+            printf("%d^%d",i,count[i]);
+            }
+        }
+    }
+
+
+    return 0;
+}

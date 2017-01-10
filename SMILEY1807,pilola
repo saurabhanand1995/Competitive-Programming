@@ -1,0 +1,58 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+
+    char arr[1000001];
+    int a[5]={9,1,8,0,7};
+
+    scanf("%s",arr);
+    //static long int dp[5][1000005];
+    long int dp[5][2]={0};
+    //memset(dp,0,sizeof(dp));
+    long int l=strlen(arr);
+    int temp=0;
+    //memset(dp,0,sizeof(dp));
+    int last=9;
+    int flag=0;
+    for (long int i=1;i<=l;i++)
+    {
+        temp=arr[i-1]-'0';
+        for (int j=1;j<=4;j++)
+        {
+            if (temp == a[j])
+            {
+
+                if(temp ==1 && flag==0)
+                {
+                    dp[j][i%2]=1;
+                    flag=1;
+                }
+                else if((dp[j][(i-1)%2] == 0) && (dp[j-1][(i-1)%2] ==0))
+                {
+                    dp[j][i%2]=0;
+                    //dp[j][i%2]=max(dp[j-1][(i-1)%2]+1,dp[j][i%2]=dp[j][(i-1)%2]);
+                }
+                else if(dp[j][(i-1)%2] == 0)
+                {
+
+                    dp[j][i%2]=max(dp[j-1][(i-1)%2]+1,dp[j][i%2]=dp[j][(i-1)%2]);
+                    //dp[j][i%2]=max(dp[j-1][(i-1)%2]+1,dp[j][i%2]=dp[j][(i-1)%2]+1);
+                }
+                else{
+                       // printf("temp is %d and j is %d\n",temp,j);
+                    dp[j][i%2]=max(dp[j-1][(i-1)%2]+1,dp[j][i%2]=dp[j][(i-1)%2]+1);
+
+                }
+            }
+            else
+            {
+                dp[j][i%2]=dp[j][(i-1)%2];
+            }
+           }
+    }
+    printf("%ld\n",dp[4][l%2]);
+    return 0;
+}

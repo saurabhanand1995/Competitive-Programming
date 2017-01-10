@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    long long int n;
+    int m,t;
+    scanf("%d",&t);
+    while (t--){
+    scanf("%lld %d",&n,&m);
+    if (m==0)
+        printf("Airborne wins.\n");
+        else
+        printf("Pagfloyd wins.\n");
+    }
+    return 0;
+}

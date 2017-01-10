@@ -1,0 +1,31 @@
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <math.h>
+
+  void main()
+  {
+
+      int t,temp,i;
+      scanf("%d",&t);
+      while (t--)
+      {
+          int k=0;
+          int n,s=0;
+          scanf("%d",&n);
+          while (1==1)
+          {
+              k++;
+              int ans=1;
+              for (i=1;i<=k;i++)
+                ans=5*ans;
+              temp=n/ans;
+    if (temp >0)
+    s=s+temp;
+    else
+        break;
+          }
+
+    printf("%d\n",s);
+
+      }
+  }

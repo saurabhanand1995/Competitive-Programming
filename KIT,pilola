@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+static int glo=0;
+int main()
+{
+    int n,k;
+    int temp;
+    char ch;
+    int arr[101];
+
+    char str[150];
+    scanf("%d",&n);
+    int i;
+    for (i=0;i<n;i++)
+        scanf("%d",&arr[i]);
+        
+     while (1)
+     {
+         scanf("%s",str);
+
+         if ((int)str[1]==49)
+            break;
+            k=0;
+          while (str[k]!='\0')
+          {
+              k++;
+          }
+
+          for (i=0;i<k;i++)
+          {
+              ch=str[i];
+
+              if (glo>=n)
+                glo=glo-n;
+
+              temp=(int)ch+arr[glo++];
+              if (temp>122)
+                temp=temp-26;
+
+              ch=(char)(temp);
+              printf("%c",ch);
+
+          }
+          printf("\n");
+
+     }
+     return 0;
+
+
+}
